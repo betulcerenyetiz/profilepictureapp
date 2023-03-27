@@ -12,16 +12,13 @@ export const handlerCamera = async () => {
   await launchCamera(options, response => {
     if (response.didCancel) {
       console.log('User cancelled image picker');
-      return;
     } else if (response.error) {
       console.log('ImagePicker Error: ', response.error);
-      return;
     } else if (response.customButton) {
       console.log('User tapped custom button: ', response.customButton);
-      return;
     } else {
       source = response.assets[0];
-      console.log('handlerCamera', source);
+      console.log('handlerImageLibrary', source);
     }
   });
   return source;

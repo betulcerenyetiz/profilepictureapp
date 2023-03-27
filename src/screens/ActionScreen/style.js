@@ -21,23 +21,24 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   imageContainer: {
-    width: 270,
+    width: 370,
     height: 450,
     borderColor: '#3C84AB',
-    borderWidth: 3,
+    borderWidth: 3.5,
     borderRadius: 20,
     borderStyle: 'dashed',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
+    padding: 5,
   },
   image: {
     width: 35,
     height: 35,
   },
   choosenImage: {
-    width: 260,
-    height: 440,
+    width: '100%',
+    height: '100%',
     borderRadius: 20,
   },
   menu: {

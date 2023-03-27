@@ -50,11 +50,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  filterArea: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#ffffff',
-  },
   zoomableArea: {
     width: '100%',
     height: '100%',
@@ -71,51 +66,6 @@ export default StyleSheet.create({
     resizeMode: 'contain',
     maxHeight: '100%',
     maxWidth: '100%',
-  },
-  controllerArea: {
-    width: '100%',
-    backgroundColor: '#181818',
-  },
-  conterollerButtonArea: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  controllerButton: {
-    width: '50%',
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#181818',
-    borderTopColor: '#181818',
-    borderWidth: 1.5,
-    borderColor: '#413F42',
-  },
-  controllerButtonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  controllerButtonPressed: {
-    width: '50%',
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#181818',
-  },
-  filterControllerArea: {
-    width: '100%',
-    height: 100,
-    backgroundColor: '#181818',
-    alignItems: 'center',
-  },
-  filterItemArea: {
-    width: 85,
-    height: 85,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#181818',
-    borderColor: '#413F42',
-    borderWidth: 1.5,
-    margin: 7.5,
   },
   holeView: {
     position: 'absolute',

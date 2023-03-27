@@ -1,10 +1,22 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Modal} from 'react-native';
 import styles from './style';
+import {useNavigation} from '@react-navigation/native';
 
-const CustomModal = ({result, modalVisible, setModalVisible}) => {
+const CustomModal = ({result, modalVisible, setModalVisible, image}) => {
   console.log('result modal', result, modalVisible);
   console.log(result.length === 0);
+
+  const navigation = useNavigation();
+
+  const no = () => {
+    setModalVisible(false);
+  };
+
+  const yes = () => {
+    setModalVisible(false);
+    navigation.navigate('Crop', {image: image, result: result});
+  };
 
   if (modalVisible) {
     if (result.length === 0) {
@@ -39,12 +51,10 @@ const CustomModal = ({result, modalVisible, setModalVisible}) => {
                 This picture has a face. Do you want to edit it?
               </Text>
               <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => setModalVisible(false)}>
+                <TouchableOpacity style={styles.button} onPress={no}>
                   <Text style={styles.buttonText}>No</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={yes}>
                   <Text style={styles.buttonText}>Yes</Text>
                 </TouchableOpacity>
               </View>

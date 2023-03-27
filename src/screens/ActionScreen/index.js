@@ -11,6 +11,7 @@ import Loading from '../../components/Loading';
 import styles from './style';
 import CustomModal from '../../components/Modal';
 import CropTheFace from '../../handlers/croptheface';
+import {focusTheFace, getZoom} from '../../handlers/focusTheFace';
 
 const actionSheetRef = createRef();
 
@@ -20,39 +21,45 @@ const ActionScreen = () => {
   let photo = null;
   const [resultState, setResultState] = useState(null);
   const [loading, setLoading] = useState(false);
+
   let result = null;
+
 
   const camera = async () => {
     photo = await handlerCamera();
     console.log('camera', photo);
     actionSheetRef.current?.hide();
-    setLoading(true);
-    setImage(photo.uri);
-    console.log('image', image);
-    result = await Detector(photo.uri);
-    setResultState(result);
-    setLoading(false);
-    if (result.length > 0) {
-      photo = await CropTheFace(photo, result);
-      setImage(photo);
+    if (photo !== null) {
+      setLoading(true);
+      setImage(photo.uri);
+      console.log('image', image);
+      result = await Detector(photo.uri);
+      setResultState(result);
+      setLoading(false);
+      if (result.length > 0) {
+        photo = await CropTheFace(photo, result);
+      }
+      setModalVisible(true);
     }
-    setModalVisible(true);
   };
 
   const imageLibrary = async () => {
     photo = await handlerImageLibrary();
     console.log('imageLibrary', photo);
     actionSheetRef.current?.hide();
-    setLoading(true);
-    setImage(photo.uri);
-    result = await Detector(photo.uri);
-    setResultState(result);
-    setLoading(false);
-    if (result.length > 0) {
-      photo = await CropTheFace(photo, result);
+    if (photo !== null) {
+      setLoading(true);
       setImage(photo);
+      console.log('image', image);
+      result = await Detector(photo.uri);
+      setResultState(result);
+      setLoading(false);
+      if (result.length > 0) {
+        // photo = await CropTheFace(photo, result);
+
+      }
+      setModalVisible(true);
     }
-    setModalVisible(true);
   };
 
   const imageFiles = async () => {
@@ -69,6 +76,7 @@ const ActionScreen = () => {
           result={resultState}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
+          image={image}
         />
       ) : null}
       <View style={styles.imageContainer}>
@@ -78,7 +86,7 @@ const ActionScreen = () => {
             source={require('../../assets/image.png')}
           />
         ) : (
-          <Image style={styles.choosenImage} source={{uri: image}} />
+          <Image style={styles.choosenImage} source={{uri: image.uri}} />
         )}
       </View>
       <TouchableOpacity
