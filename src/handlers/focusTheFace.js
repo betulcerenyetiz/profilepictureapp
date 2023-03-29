@@ -4,14 +4,14 @@ export const focusTheFace = (image, result) => {
   const calculate = (canvas, face) => {
     originX = face.width / 2 + face.left;
     originY = face.height / 2 + face.top;
-    console.log(face);
+    // console.log(face);
     let cut = {
       x: originX - face.width,
       y: originY - face.height,
       width: face.width * 2,
       height: face.height * 2,
     };
-    console.log('focustheface-------------', cut);
+    // console.log('focustheface-------------', cut);
     if (cut.x < 0) {
       cut.x = 0;
     }
@@ -26,7 +26,7 @@ export const focusTheFace = (image, result) => {
     }
     return cut;
   };
-  console.log('result', result[0].frame);
+  // console.log('result', result[0].frame);
   const newCut = calculate(image, result[0].frame);
   const cropRegion = {
     x: newCut.x,
@@ -38,13 +38,13 @@ export const focusTheFace = (image, result) => {
       y: originY,
     },
   };
-  console.log('cropRegion', cropRegion);
+  // console.log('cropRegion', cropRegion);
   return cropRegion;
 };
 
 export const getZoom = (focusedRegion, image) => {
-  console.log('focusedRegion', focusedRegion);
-  console.log('image', image);
+  // console.log('focusedRegion', focusedRegion);
+  // console.log('image', image);
   let zoom = 1;
   if (image.width > image.height) {
     zoom = image.width / focusedRegion.width;

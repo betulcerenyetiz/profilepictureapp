@@ -4,14 +4,14 @@ const CropTheFace = async (image, result) => {
   const calculate = (canvas, face) => {
     const originX = face.width / 2 + face.left;
     const originY = face.height / 2 + face.top;
-    console.log(face);
+    // console.log(face);
     let cut = {
       x: originX - face.width,
       y: originY - face.height,
       width: face.width * 2,
       height: face.height * 2,
     };
-    console.log('-------------', cut);
+    // console.log('-------------', cut);
     if (cut.x < 0) {
       cut.x = 0;
     }
@@ -26,7 +26,7 @@ const CropTheFace = async (image, result) => {
     }
     return cut;
   };
-  console.log('result', result[0].frame);
+  // console.log('result', result[0].frame);
   const newCut = calculate(image, result[0].frame);
   const cropRegion = {
     x: newCut.x,
@@ -34,7 +34,7 @@ const CropTheFace = async (image, result) => {
     width: newCut.width,
     height: newCut.height,
   };
-  console.log('cropRegion', cropRegion);
+  // console.log('cropRegion', cropRegion);
   const targetSize = {
     width: 500,
     height: 500,
@@ -45,7 +45,7 @@ const CropTheFace = async (image, result) => {
     cropRegion,
     targetSize,
   );
-  console.log('croppedImage', croppedImage);
+  // console.log('croppedImage', croppedImage);
   return croppedImage;
 };
 

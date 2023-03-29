@@ -50,6 +50,16 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  mainImage: {
+    minWidth: '100%',
+    width: '100%',
+    maxWidth: '100%',
+    minHeight: '75%',
+    height: '75%',
+    maxHeight: '75%',
+    overflow: 'hidden',
+    resizeMode: 'contain',
+  },
   filterArea: {
     width: '100%',
     height: '100%',
@@ -85,8 +95,8 @@ export default StyleSheet.create({
     margin: 7.5,
   },
   filterImage: {
-    width: 50,
-    height: 50,
+    width: 65,
+    height: 65,
   },
   filterName: {
     color: '#fff',

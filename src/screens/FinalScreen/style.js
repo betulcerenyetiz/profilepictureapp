@@ -8,11 +8,11 @@ export default StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   imageContainer: {
-    width: 370,
-    height: 450,
+    width: 350,
+    height: 350,
     borderColor: '#3C84AB',
     borderWidth: 3.5,
-    borderRadius: 20,
+    borderRadius: 200,
     borderStyle: 'dashed',
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,6 +22,6 @@ export default StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    borderRadius: 20,
+    borderRadius: 200,
   },
 });

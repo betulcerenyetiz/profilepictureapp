@@ -10,8 +10,6 @@ import Detector from '../../handlers/facedetection';
 import Loading from '../../components/Loading';
 import styles from './style';
 import CustomModal from '../../components/Modal';
-import CropTheFace from '../../handlers/croptheface';
-import {focusTheFace, getZoom} from '../../handlers/focusTheFace';
 
 const actionSheetRef = createRef();
 
@@ -24,47 +22,39 @@ const ActionScreen = () => {
 
   let result = null;
 
-
   const camera = async () => {
     photo = await handlerCamera();
-    console.log('camera', photo);
+    // console.log('camera', photo);
     actionSheetRef.current?.hide();
     if (photo !== null) {
       setLoading(true);
       setImage(photo.uri);
-      console.log('image', image);
+      // console.log('image', image);
       result = await Detector(photo.uri);
       setResultState(result);
       setLoading(false);
-      if (result.length > 0) {
-        photo = await CropTheFace(photo, result);
-      }
       setModalVisible(true);
     }
   };
 
   const imageLibrary = async () => {
     photo = await handlerImageLibrary();
-    console.log('imageLibrary', photo);
+    // console.log('imageLibrary', photo);
     actionSheetRef.current?.hide();
     if (photo !== null) {
       setLoading(true);
       setImage(photo);
-      console.log('image', image);
+      // console.log('image', image);
       result = await Detector(photo.uri);
       setResultState(result);
       setLoading(false);
-      if (result.length > 0) {
-        // photo = await CropTheFace(photo, result);
-
-      }
       setModalVisible(true);
     }
   };
 
   const imageFiles = async () => {
     setImage(await handlerImagePicker());
-    console.log('imageFiles', image);
+    // console.log('imageFiles', image);
     actionSheetRef.current?.hide();
   };
 

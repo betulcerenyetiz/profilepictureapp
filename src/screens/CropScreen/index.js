@@ -5,6 +5,7 @@ import {focusTheFace, getZoom} from '../../handlers/focusTheFace';
 import styles from './style';
 import ZoomableView from '../../components/ZoomableView/ZoomableView';
 import PhotoManipulator from 'react-native-photo-manipulator';
+import ThumbnailPhoto from '../../handlers/thumbnail';
 
 const CropEditor = ({route}) => {
   const navigation = useNavigation();
@@ -28,8 +29,8 @@ const CropEditor = ({route}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log('zoomvalue', zoom);
-  console.log('focusedRegion', region);
+  // console.log('zoomvalue', zoom);
+  // console.log('focusedRegion', region);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -51,10 +52,11 @@ const CropEditor = ({route}) => {
                 lastCropRegion,
                 targetSize,
               );
-              console.log('croppedImage: ', croppedImage);
+              // console.log('croppedImage: ', croppedImage);
+              const thumbnailImage = await ThumbnailPhoto(croppedImage);
               navigation.navigate('Filter', {
-                image: image,
-                croppedImage: croppedImage,
+                croppedImageUri: croppedImage,
+                thumbnailUri: thumbnailImage,
               });
             }}>
             <Text style={styles.headerButtonText}>Done</Text>
@@ -68,10 +70,10 @@ const CropEditor = ({route}) => {
             initialOffsetY={(image.height / 2 - region.center.y) / 2}
             initialZoom={zoom}
             imageData={image}
-            // onManipulationEnd={eventObject => {
-            //   console.log('eventObject: ', eventObject);
-            //   setLastCropRegion(eventObject);
-            // }}
+            onManipulationEnd={eventObject => {
+              // console.log('eventObject: ', eventObject);
+              setLastCropRegion(eventObject);
+            }}
           />
         )}
       </View>

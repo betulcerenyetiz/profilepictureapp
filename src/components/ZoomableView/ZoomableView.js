@@ -10,35 +10,58 @@ export default function ZoomableView({
   onManipulationEnd,
   ...props
 }) {
+  const getMinZoom = () => {
+    if (imageData.width < imageData.height) {
+      return imageData.height / imageData.width;
+    } else {
+      return imageData.width / imageData.height;
+    }
+  };
+
   const onManipulationEndCallback = zoomableViewEventObject => {
     if (!onManipulationEnd) {
       return;
     }
-    console.log(
-      'zoomableViewEventObject',
-      zoomableViewEventObject.offsetX - 150 / zoomableViewEventObject.zoomLevel,
-    );
 
     let aspect = 1;
-    if (imageData.width > imageData.height) {
+    if (imageData.width < imageData.height) {
       aspect = imageData.height / zoomableViewEventObject.zoomLevel;
     } else {
       aspect = imageData.width / zoomableViewEventObject.zoomLevel;
     }
 
+    // console.log('aspect: ', aspect);
+
+    let targetX =
+      imageData.width / 2 - zoomableViewEventObject.offsetX * 2 - aspect / 2;
+    let targetY =
+      imageData.height / 2 - zoomableViewEventObject.offsetY * 2 - aspect / 2;
+
+    if (targetX < 0) {
+      targetX = 0;
+    }
+
+    if (targetY < 0) {
+      targetY = 0;
+    }
+
+    if (targetX + aspect > imageData.width) {
+      targetX -= targetX + aspect - imageData.width;
+    }
+
+    if (targetY + aspect > imageData.height) {
+      targetY -= targetY + aspect - imageData.height;
+    }
+
     const eventObject = {
       width: aspect,
       height: aspect,
-      x:
-        zoomableViewEventObject.offsetX -
-        150 / zoomableViewEventObject.zoomLevel,
-      y:
-        zoomableViewEventObject.offsetY -
-        150 / zoomableViewEventObject.zoomLevel,
-      // center: {
-      //   x: zoomableViewEventObject.offsetX,
-      //   y: zoomableViewEventObject.offsetY,
-      // },
+      x: targetX,
+      y: targetY,
+      center: {
+        x: zoomableViewEventObject.offsetX,
+        y: zoomableViewEventObject.offsetY,
+      },
     };
 
     onManipulationEnd(eventObject);
@@ -48,11 +71,7 @@ export default function ZoomableView({
     if (initialZoom) {
       return initialZoom;
     } else {
-      if (imageData.width > imageData.height) {
-        return imageData.width / imageData.height;
-      } else {
-        return imageData.height / imageData.width;
-      }
+      getMinZoom();
     }
   };
 
@@ -60,7 +79,7 @@ export default function ZoomableView({
     <View style={styles.zoomableParent}>
       <ReactNativeZoomableView
         maxZoom={props.maxZoom ? props.maxZoom : 4}
-        minZoom={props.minZoom ? props.minZoom : 0.5}
+        minZoom={props.minZoom ? props.minZoom : getMinZoom()}
         zoomStep={props.zoomStep ? props.zoomStep : 0.5}
         initialZoom={getInitialZoom()}
         initialOffsetX={initialOffsetX}

@@ -1,135 +1,170 @@
-import {
-  AdenCompat,
-  LarkCompat,
-  MoonCompat,
-  LofiCompat,
-  RiseCompat,
-  MavenCompat,
-  ReyesCompat,
-  SlumberCompat,
-  PerpetuaCompat,
-  MayfairCompat,
-  HudsonCompat,
-  ValenciaCompat,
-  Xpro2Compat,
-  WillowCompat,
-  _1977Compat,
-  BrannanCompat,
-  NashvilleCompat,
-  ToasterCompat,
-  WaldenCompat,
-  GinghamCompat,
-  ClarendonCompat,
-  StinsonCompat,
-  BrooklynCompat,
-  EarlybirdCompat,
-  InkwellCompat,
-  KelvinCompat,
-} from 'react-native-image-filter-kit';
-
 export const FilterData = [
-  {
-    name: 'Aden',
-    filter: AdenCompat,
-  },
-  {
-    name: 'Lark',
-    filter: LarkCompat,
-  },
-  {
-    name: 'Moon',
-    filter: MoonCompat,
-  },
-  {
-    name: 'Lofi',
-    filter: LofiCompat,
-  },
-  {
-    name: 'Rise',
-    filter: RiseCompat,
-  },
-  {
-    name: 'Maven',
-    filter: MavenCompat,
-  },
-  {
-    name: 'Reyes',
-    filter: ReyesCompat,
-  },
-  {
-    name: 'Slumber',
-    filter: SlumberCompat,
-  },
-  {
-    name: 'Perpetua',
-    filter: PerpetuaCompat,
-  },
-  {
-    name: 'Mayfair',
-    filter: MayfairCompat,
-  },
-  {
-    name: 'Hudson',
-    filter: HudsonCompat,
-  },
-  {
-    name: 'Valencia',
-    filter: ValenciaCompat,
-  },
-  {
-    name: 'Xpro2',
-    filter: Xpro2Compat,
-  },
-  {
-    name: 'Willow',
-    filter: WillowCompat,
-  },
-  {
-    name: 'Earlybird',
-    filter: EarlybirdCompat,
-  },
-  {
-    name: '1977',
-    filter: _1977Compat,
-  },
-  {
-    name: 'Brannan',
-    filter: BrannanCompat,
-  },
-  {
-    name: 'Inkwell',
-    filter: InkwellCompat,
-  },
-  {
-    name: 'Nashville',
-    filter: NashvilleCompat,
-  },
-  {
-    name: 'Toaster',
-    filter: ToasterCompat,
-  },
-  {
-    name: 'Walden',
-    filter: WaldenCompat,
-  },
-  {
-    name: 'Kelvin',
-    filter: KelvinCompat,
-  },
-  {
-    name: 'Gingham',
-    filter: GinghamCompat,
-  },
-  {
-    name: 'Clarendon',
-    filter: ClarendonCompat,
-  },
-  {
-    name: 'Stinson',
-    filter: StinsonCompat,
-  },
-  {
-    name: 'Brooklyn',
-    filter: BrooklynCompat,
-  },
+  'Normal',
+  'Aden',
+  'Lark',
+  'Moon',
+  'Lofi',
+  'Rise',
+  'Maven',
+  'Reyes',
+  'Slumber',
+  'Perpetua',
+  'Mayfair',
+  'Hudson',
+  'Valencia',
+  'Xpro2',
+  'Willow',
+  '_1977',
+  'Brannan',
+  'Nashville',
+  'Toaster',
+  'Walden',
+  'Gingham',
+  'Clarendon',
+  'Stinson',
+  'Brooklyn',
+  'Earlybird',
+  'Inkwell',
+  'Kelvin',
 ];
+
+// import {
+//   Normal,
+//   Aden,
+//   Lark,
+//   Moon,
+//   Lofi,
+//   Rise,
+//   Maven,
+//   Reyes,
+//   Slumber,
+//   Perpetua,
+//   Mayfair,
+//   Hudson,
+//   Valencia,
+//   Xpro2,
+//   Willow,
+//   _1977,
+//   Brannan,
+//   Nashville,
+//   Toaster,
+//   Walden,
+//   Gingham,
+//   Clarendon,
+//   Stinson,
+//   Brooklyn,
+//   Earlybird,
+//   Inkwell,
+//   Kelvin,
+// } from 'react-native-image-filter-kit';
+
+// export const FilterData = [
+//   {
+//     name: 'Normal',
+//     filter: Normal,
+//   },
+//   {
+//     name: 'Aden',
+//     filter: Aden,
+//   },
+//   {
+//     name: 'Lark',
+//     filter: Lark,
+//   },
+//   {
+//     name: 'Moon',
+//     filter: Moon,
+//   },
+//   {
+//     name: 'Lofi',
+//     filter: Lofi,
+//   },
+//   {
+//     name: 'Reyes',
+//     filter: Reyes,
+//   },
+//   {
+//     name: 'Slumber',
+//     filter: Slumber,
+//   },
+//   {
+//     name: 'Perpetua',
+//     filter: Perpetua,
+//   },
+//   {
+//     name: 'Mayfair',
+//     filter: Mayfair,
+//   },
+//   {
+//     name: 'Hudson',
+//     filter: Hudson,
+//   },
+//   {
+//     name: 'Valencia',
+//     filter: Valencia,
+//   },
+//   {
+//     name: 'Rise',
+//     filter: Rise,
+//   },
+//   {
+//     name: 'Maven',
+//     filter: Maven,
+//   },
+//   {
+//     name: 'Xpro2',
+//     filter: Xpro2,
+//   },
+//   {
+//     name: 'Willow',
+//     filter: Willow,
+//   },
+//   {
+//     name: 'Earlybird',
+//     filter: Earlybird,
+//   },
+//   {
+//     name: '_1977',
+//     filter: _1977,
+//   },
+//   {
+//     name: 'Brannan',
+//     filter: Brannan,
+//   },
+//   {
+//     name: 'Inkwell',
+//     filter: Inkwell,
+//   },
+//   {
+//     name: 'Nashville',
+//     filter: Nashville,
+//   },
+//   {
+//     name: 'Toaster',
+//     filter: Toaster,
+//   },
+//   {
+//     name: 'Walden',
+//     filter: Walden,
+//   },
+//   {
+//     name: 'Kelvin',
+//     filter: Kelvin,
+//   },
+//   {
+//     name: 'Gingham',
+//     filter: Gingham,
+//   },
+//   {
+//     name: 'Clarendon',
+//     filter: Clarendon,
+//   },
+//   {
+//     name: 'Stinson',
+//     filter: Stinson,
+//   },
+//   {
+//     name: 'Brooklyn',
+//     filter: Brooklyn,
+//   },
+// ];

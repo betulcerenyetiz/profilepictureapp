@@ -1,54 +1,62 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FilterData} from '../../handlers/filterData';
-import ThumbnailPhoto from '../../handlers/thumbnail';
 import styles from './style';
+import FilteredImage from '../../components/FilteredImage/FilteredImage';
+import {cleanExtractedImagesCache} from 'react-native-image-filter-kit';
 
 const FilterEditor = ({route}) => {
   const navigation = useNavigation();
-  const {image, croppedImage} = route.params;
-  const imageRef = useRef(croppedImage);
-  const [filter, setFilter] = useState(0);
-  let thumbnailImage = useRef('');
+  const {croppedImageUri, thumbnailUri} = route.params;
+  const [activeFilter, setActiveFilter] = useState(0);
+  // const [thumbnailUri, setThumbnailUri] = useState(null);
+
+  let extractedImageUri = null;
 
   useEffect(() => {
-    ThumbnailPhoto(image, 128).then(res => {
-      thumbnailImage.current = res;
-    });
+    cleanExtractedImagesCache();
   }, []);
 
   const onSelectedFilter = index => {
-    setFilter(index);
+    setActiveFilter(index);
   };
 
-  //   const takeThumbnail = async () => {
-  //     thumbnailImage = await ThumbnailPhoto(image, 128);
-  //     console.log('thumbnailImage', thumbnailImage);
-  //     return;
-  //   };
+  const onExtractImageHandler = uri => {
+    extractedImageUri = uri;
+  };
 
-  const renderFilterItem = ({item, index}) => {
-    const FilterComponent = item.filter;
-    // takeThumbnail();
-    const thumbnail = (
-      <Image
-        source={{uri: thumbnailImage.current}}
-        style={styles.filterImage}
-        resizeMode="contain"
-      />
-    );
+  const renderFilterItem = filterName => {
     return (
       <TouchableOpacity
+        id={filterName}
         style={styles.filterItem}
-        onPress={() => onSelectedFilter(index)}>
-        <FilterComponent image={thumbnail} />
-        <Text style={styles.filterName}>{item.name}</Text>
+        onPress={() => onSelectedFilter(filterName.item)}>
+        <FilteredImage
+          imageUri={thumbnailUri}
+          filterName={filterName.item}
+          style={styles.filterImage}
+        />
+        <Text style={styles.filterName}>{filterName.item}</Text>
       </TouchableOpacity>
     );
   };
 
-  const SelectedFilterComponent = FilterData[filter].filter;
+  const renderMainImage = () => {
+    return (
+      <FilteredImage
+        imageUri={croppedImageUri}
+        filterName={activeFilter}
+        style={styles.mainImage}
+        onExtractImage={onExtractImageHandler}
+        isExtractEnabled={true}
+      />
+    );
+  };
+
+  const keyExtractor = filterName => {
+    return filterName;
+  };
 
   return (
     <View style={styles.container}>
@@ -67,22 +75,22 @@ const FilterEditor = ({route}) => {
           <TouchableOpacity style={styles.buttonArea}>
             <Text
               style={styles.headerButtonText}
-              onPress={() => navigation.navigate('Final')}>
+              onPress={() => {
+                navigation.navigate('Final', {
+                  imageUri: extractedImageUri,
+                });
+              }}>
               Done
             </Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.body}>
-        <SelectedFilterComponent
-          image={
-            <Image
-              style={styles.image}
-              source={{uri: imageRef.current}}
-              resizeMode="contain"
-            />
-          }
-        />
+        {/* <Image style={styles.image}
+          source={{uri: filteredImageUri}}
+          resizeMode='contain'
+        /> */}
+        {renderMainImage()}
       </View>
       <View style={styles.controllerArea}>
         <View style={styles.filterControllerArea}>
@@ -90,9 +98,26 @@ const FilterEditor = ({route}) => {
             horizontal
             data={FilterData}
             renderItem={renderFilterItem}
-            keyExtractor={item => item.name}
+            keyExtractor={keyExtractor}
             showsHorizontalScrollIndicator={false}
+            maxToRenderPerBatch={5}
           />
+          {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {FilterData.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  style={styles.filterItem}
+                  onPress={() => onSelectedFilter(index)}>
+                  <FilteredImage
+                    imageUri={thumbnailUri}
+                    filterName={item.name}
+                    style={styles.filterImage}
+                  />
+                  <Text style={styles.filterName}>{item.name}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView> */}
         </View>
       </View>
     </View>

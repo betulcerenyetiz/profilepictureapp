@@ -4,8 +4,8 @@ import styles from './style';
 import {useNavigation} from '@react-navigation/native';
 
 const CustomModal = ({result, modalVisible, setModalVisible, image}) => {
-  console.log('result modal', result, modalVisible);
-  console.log(result.length === 0);
+  // console.log('result modal', result, modalVisible);
+  // console.log(result.length === 0);
 
   const navigation = useNavigation();
 
